@@ -1,0 +1,15 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy dependency specifications and install
+COPY package*.json ./
+RUN npm install
+
+# Copy application source
+COPY . .
+
+EXPOSE 5173
+
+# Run Vite with 0.0.0.0 host binding for container port exposure
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
